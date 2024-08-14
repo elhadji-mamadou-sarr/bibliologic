@@ -1,0 +1,60 @@
+
+{{ form_start(form) }}
+
+    <div class="gap-2 row">
+
+        <div class="row">
+            <div class="mb-2 col-md-6">
+                <label class="form-label">Titre du livre</label>
+                {{ form_widget(form.titre,{'attr': {'class': 'form-control '}}) }}
+            </div>
+
+            <div class="mb-2 col-md-6">
+                <label class="form-label">Auteur du livre</label>
+                {{ form_widget(form.auteur,{'attr': {'class': 'form-control '}}) }}
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="mb-2 col-md-6">
+                <label class="form-label">{{ form_label(form.genre) }}</label>
+                {{ form_widget(form.genre,{'attr': {'class': 'form-control '}}) }}
+            </div>
+            <div class="mb-2 col-md-6">
+                <label class="form-label">{{ form_label(form.langue) }}</label>
+                {{ form_widget(form.langue,{'attr': {'class': 'form-control '}}) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-2 col-md-6">
+                <label class="form-label">{{ form_label(form.date_publication) }}</label>
+                {{ form_widget(form.date_publication,{'attr': {'class': 'form-control '}}) }}
+            </div>
+            <div class="mb-2 col-md-6">
+                <label class="form-label">{{ form_label(form.nombre_pages) }}</label>
+                {{ form_widget(form.nombre_pages,{'attr': {'class': 'form-control '}}) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-2 col-md-6">
+                <label class="form-label">{{ form_label(form.localisation) }}</label>
+                {{ form_widget(form.localisation,{'attr': {'class': 'form-control '}}) }}
+            </div>
+            <div class="mb-2 col-md-6">
+                <label class="form-label">{{ form_label(form.etat) }}</label>
+                {{ form_widget(form.etat,{'attr': {'class': 'form-control '}}) }}
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-success mb-2 col-md-6">Enregistrer</button>
+        </div>
+
+    </div>
+
+
+{{ form_end(form) }}

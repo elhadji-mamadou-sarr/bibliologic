@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Auteur{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+    <h1>Modifier Auteur</h1>
+ 
+    {{ include('auteur/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <div class="d-flex justify-content-between">
+        <a class='btn-primary' href="{{ path('app_auteur_index') }}">Retour</a>
+
+        {{ include('auteur/_delete_form.html.twig') }}
+
+    </div>
+
+
+ </div>
+{% endblock %}

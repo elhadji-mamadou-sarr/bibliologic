@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Livre{% endblock %}
+
+{% block body %} 
+
+    <div class="container mt-5">
+    <h1>Modifier Livre</h1>
+
+    {{ include('livre/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <div class='d-flex justify-content-between'>
+    <a class="btn btn-primary" href="{{ path('app_livre_index') }}">Retour </a>
+
+    {{ include('livre/_delete_form.html.twig') }}
+
+    </div>
+
+    </div>
+{% endblock %}
+

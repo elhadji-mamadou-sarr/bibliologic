@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auteur {% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+
+    <div class="d-flex justify-content-between">
+        <h1>
+            Liste des auteurs
+        </h1>
+
+        <div class="row g-3">
+            <div class="col-auto">
+                <a href="{{ path('app_auteur_new') }}" class="btn btn-primary mb-3"> + &nbsp; Ajouter</a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Nationalite</th>
+                <th>Date de naissance</th>
+                <th>Biographie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auteur in auteurs %}
+            <tr>
+                <td>{{ auteur.id }}</td>
+                <td>{{ auteur.nom }}</td>
+                <td>{{ auteur.prenom }}</td>
+                <td>{{ auteur.nationalite }}</td>
+                <td>{{ auteur.dateNaissance ? auteur.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ auteur.biographie }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('app_auteur_show', {'id': auteur.id}) }}">detail</a>
+                    <a class="btn btn-primary" href="{{ path('app_auteur_edit', {'id': auteur.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

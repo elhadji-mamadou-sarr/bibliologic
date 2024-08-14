@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+
+    
+    <div class="row">
+        <div class="mb-2 col-md-6">
+            <label class="form-label">Nom de l'auteur</label>
+            {{ form_widget(form.nom,{'attr': {'class': 'form-control '}}) }}
+        </div>
+
+        <div class="mb-2 col-md-6">
+            <label class="form-label">Prenom</label>
+            {{ form_widget(form.prenom,{'attr': {'class': 'form-control '}}) }}
+        </div>
+
+    </div>
+    
+    <div class="row">
+        <div class="mb-2 col-md-6">
+            <label class="form-label">Nationalite</label>
+            {{ form_widget(form.nationalite,{'attr': {'class': 'form-control '}}) }}
+        </div>
+
+        <div class="mb-2 col-md-6">
+            <label class="form-label">date de naissance</label>
+            {{ form_widget(form.date_naissance,{'attr': {'class': 'form-control '}}) }}
+        </div>
+
+        <div class="mb-2 col-md-12">
+            <label class="form-label">Biographie</label>
+            {{ form_widget(form.biographie,{'attr': {'class': 'form-control'}}) }}
+        </div>
+
+    </div>
+
+
+    <button class="btn btn-primary mt-3">{{ button_label|default('Enregistrer') }}</button>
+
+
+{{ form_end(form) }}

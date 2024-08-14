@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Auteur{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1 class="d-flex justify-content-between">Ajouter un auteur
+        
+            <a class="btn btn-primary mt-2" href="{{ path('app_auteur_index') }}">Retour a la liste</a>
+        </h1>
+
+    {{ include('auteur/_form.html.twig') }}
+
+{% endblock %}
