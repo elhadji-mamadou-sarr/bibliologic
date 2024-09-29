@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneCommande index{% endblock %}
+
+{% block body %}
+    <h1>LigneCommande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Designation</th>
+                <th>Prix</th>
+                <th>PremierPaiement</th>
+                <th>Domaine</th>
+                <th>Rubriques</th>
+                <th>InformationUtil</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne_commande in ligne_commandes %}
+            <tr>
+                <td>{{ ligne_commande.id }}</td>
+                <td>{{ ligne_commande.designation }}</td>
+                <td>{{ ligne_commande.prix }}</td>
+                <td>{{ ligne_commande.premierPaiement ? ligne_commande.premierPaiement|date('Y-m-d') : '' }}</td>
+                <td>{{ ligne_commande.domaine }}</td>
+                <td>{{ ligne_commande.rubriques ? ligne_commande.rubriques|join(', ') : '' }}</td>
+                <td>{{ ligne_commande.informationUtil }}</td>
+                <td>
+                    <a href="{{ path('app_ligne_commande_show', {'id': ligne_commande.id}) }}">show</a>
+                    <a href="{{ path('app_ligne_commande_edit', {'id': ligne_commande.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ligne_commande_new') }}">Create new</a>
+{% endblock %}

@@ -1,48 +1,45 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Auteur;
-use App\Entity\User;
 use App\Form\AuteurType;
 use App\Repository\AuteurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/auteur')]
-class AuteurController extends AbstractController
+class AuteurControllerApi extends AbstractController
 {
-    
-    #[Route('/', name: 'app_auteur_index', methods: ['GET'])]
-    public function index(AuteurRepository $auteurRepository, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
+    #[Route('/auteurs', name: 'api.auteur.index', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
+    public function index(AuteurRepository $auteurRepository): Response
     {
-        return $this->render('auteur/index.html.twig', [
-            'auteurs' => $auteurRepository->findAll(),
-        ]);
+        $auteurs = $auteurRepository->findAll();
+
+        return $this->json($auteurs, 200, []);
     }
 
-    #[Route('/new', name: 'app_auteur_new', methods: ['GET', 'POST'])]
+    #[Route('/api/new', name: 'api.auteur.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $data = json_decode($request->getContent(), true);
+        
         $auteur = new Auteur();
-        $form = $this->createForm(AuteurType::class, $auteur);
-        $form->handleRequest($request);
+        $auteur->setNom($data['nom']); 
+        $auteur->setPrenom($data['prenom']); 
+        $auteur->setNationalite($data['nationalite']); 
+        $dateN = \DateTime::createFromFormat(\DateTime::ATOM, $data['dateNaissance']);
+        $auteur->setDateNaissance($dateN); 
+        $auteur->setBiographie($data['biographie']); 
+        
+        $entityManager->persist($auteur);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($auteur);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_auteur_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('auteur/new.html.twig', [
-            'auteur' => $auteur,
-            'form' => $form,
-        ]);
+        return $this->json($auteur, 200, []);
     }
 
     #[Route('/{id}', name: 'app_auteur_show', methods: ['GET'])]

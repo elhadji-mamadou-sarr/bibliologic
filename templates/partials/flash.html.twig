@@ -1,0 +1,29 @@
+
+
+{% for type, message in app.flashes %}
+
+     <div class="position-relative">
+
+    {% if type == "success" %}
+
+        <div class="alert bg-success alert-dismissible fade show mt-2 mb-0 position-absolute top-0 end-0" role="alert">
+            <strong>Succès !</strong> <span>{{ message | join('. ')}}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <i class="bi bi-x-circle color-white"></i>
+            </button>
+        </div>
+            
+    {% else %}
+
+        <div class="alert bg-danger alert-dismissible fade show mt-2 mb-0 color-white position-absolute top-0 end-0" role="alert">
+            <strong>Erreur !</strong> {{ message | join('. ')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <i class="bi bi-x-circle color-white"></i>
+            </button>
+        </div>
+
+    {% endif %}
+
+    </div>
+
+{% endfor %}

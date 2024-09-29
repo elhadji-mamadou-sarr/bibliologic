@@ -1,0 +1,47 @@
+{{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+
+   <input type="hidden" id="id_ligne" name="id_ligne"/>
+
+    <div class="mb-1">
+        {{ form_label(form.designation, '', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.designation, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.designation) }}</div>
+    </div>
+
+    <div class="mb-1">
+        {{ form_label(form.prix, '', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.prix) }}</div>
+    </div>
+
+    <div class="mb-1">
+        {{ form_label(form.premierPaiement, '', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.premierPaiement, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.premierPaiement) }}</div>
+    </div>
+
+    <div class="mb-1">
+        {{ form_label(form.domaine, '', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.domaine, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.domaine) }}</div>
+    </div>
+
+    <div class="mb-1">
+        {{ form_label(form.rubriques, '', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.rubriques, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.rubriques) }}</div>
+    </div>
+
+
+    <div class="mb-1">
+        {{ form_label(form.informationUtil, '', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.informationUtil, {'attr': {'class': 'form-control'}}) }}
+        <div class="text-danger">{{ form_errors(form.informationUtil) }}</div>
+    </div>
+
+
+
+    <button class="btn btn-dark">{{ button_label|default('Enregistrement') }}</button>
+
+
+{{ form_end(form) }}

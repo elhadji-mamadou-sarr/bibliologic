@@ -2,31 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Livre;
+use App\Entity\LigneCommande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Livre>
+ * @extends ServiceEntityRepository<LigneCommande>
  */
-class LivreRepository extends ServiceEntityRepository
+class LigneCommandeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Livre::class);
+        parent::__construct($registry, LigneCommande::class);
     }
 
-    public function findByTitle(string $searchTerm): array
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.titre LIKE :searchTerm')
-            ->setParameter('searchTerm', '%' . $searchTerm . '%')
-            ->orderBy('l.titre', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
     //    /**
-    //     * @return Livre[] Returns an array of Livre objects
+    //     * @return LigneCommande[] Returns an array of LigneCommande objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -40,7 +31,7 @@ class LivreRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Livre
+    //    public function findOneBySomeField($value): ?LigneCommande
     //    {
     //        return $this->createQueryBuilder('l')
     //            ->andWhere('l.exampleField = :val')

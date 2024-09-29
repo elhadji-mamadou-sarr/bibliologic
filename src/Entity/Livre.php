@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\LivreRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: LivreRepository::class)]
 class Livre
@@ -14,29 +17,42 @@ class Livre
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, )]
+    #[Assert\NotNull(message:"Le titre est obligatoire")]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message:"L'auteur est obligatoire")]
     private ?string $auteur = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message:"Le genre du livre est obligatoire")]
     private ?string $genre = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message:"La langue est obligatoire")]
     private ?string $langue = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_publication = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message:"Le nombre de pade est obligatoire")]
     private ?int $nombre_pages = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message:"La localisation est obligatoire")]
     private ?string $localisation = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message:"L'etat est obligatoire")]
     private ?string $etat = null;
+
+    #[ORM\ManyToOne(inversedBy: 'livres')]
+    private ?Categorie $categorie = null;
+
+    #[ORM\Column]
+    private ?bool $projet = null;
 
     public function getId(): ?int
     {
@@ -135,6 +151,30 @@ class Livre
     public function setEtat(string $etat): static
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function isProjet(): ?bool
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(bool $projet): static
+    {
+        $this->projet = $projet;
 
         return $this;
     }

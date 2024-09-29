@@ -1,60 +1,103 @@
 
 {{ form_start(form) }}
 
-    <div class="gap-2 row">
+    <div class="row g-3">
 
-        <div class="row">
-            <div class="mb-2 col-md-6">
-                <label class="form-label">Titre du livre</label>
-                {{ form_widget(form.titre,{'attr': {'class': 'form-control '}}) }}
-            </div>
-
-            <div class="mb-2 col-md-6">
-                <label class="form-label">Auteur du livre</label>
-                {{ form_widget(form.auteur,{'attr': {'class': 'form-control '}}) }}
-            </div>
-
+        <div class="mb-2 col-md-6">
+            <label class="form-label">Titre du livre</label>
+            {{ form_widget(form.titre,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.titre) }}</div>
         </div>
 
-        <div class="row">
-            <div class="mb-2 col-md-6">
-                <label class="form-label">{{ form_label(form.genre) }}</label>
-                {{ form_widget(form.genre,{'attr': {'class': 'form-control '}}) }}
+        <div class="mb-2 col-md-6">
+            <label class="form-label">Auteur du livre</label>
+            {{ form_widget(form.auteur,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback"> {{ form_errors(form.auteur) }}</div>
+        </div>
+
+        <div class="mb-2 col-md-6">
+            <label class="form-label">{{ form_label(form.genre) }}</label>
+            {{ form_widget(form.genre,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.genre) }}</div>
+        </div>
+        <div class="mb-2 col-md-6">
+            <label class="form-label">{{ form_label(form.langue) }}</label>
+            {{ form_widget(form.langue,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.langue) }}</div>
+        </div>
+
+        <div class="mb-2 col-md-6">
+            <label class="form-label">{{ form_label(form.date_publication) }}</label>
+            {{ form_widget(form.date_publication,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.date_publication) }}</div>
+        </div>
+        <div class="mb-2 col-md-6">
+            <label class="form-label">{{ form_label(form.nombre_pages) }}</label>
+            {{ form_widget(form.nombre_pages,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.nombre_pages) }}</div>
+        </div>
+
+        <div class="mb-2 col-md-6">
+            <label class="form-label">{{ form_label(form.localisation) }}</label>
+            {{ form_widget(form.localisation,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.localisation) }}</div>
+        </div>
+
+        <div class="mb-2 col-md-6">
+            <label class="form-label">{{ form_label(form.etat) }}</label>
+            {{ form_widget(form.etat,{'attr': {'class': 'form-control '}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.etat) }}</div>
+        </div>
+
+        <div class="col-md-6" >
+            <label class="form-label">Type de service</label>
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">{{ form_errors(form.categorie) }}</div>
+        </div>
+
+        <div class="mt-2 col-md-6 d-flex">
+
+            <div class="mt-4 pl-2 col form-check form-switch">
+                {{ form_widget(form.projet, {'attr': {'class': 'form-check-input', 'id': 'projetSwitch'}}) }}
+                <label class="form-label">{{ form_label(form.projet) }}</label>
             </div>
-            <div class="mb-2 col-md-6">
-                <label class="form-label">{{ form_label(form.langue) }}</label>
-                {{ form_widget(form.langue,{'attr': {'class': 'form-control '}}) }}
+            
+            <div class="col" id="tokenField">
+                <label class="form-label">Token</label>
+                <input type="password" name="token" class="form-control" id="exampleInputPassword1">
             </div>
         </div>
 
-        <div class="row">
-            <div class="mb-2 col-md-6">
-                <label class="form-label">{{ form_label(form.date_publication) }}</label>
-                {{ form_widget(form.date_publication,{'attr': {'class': 'form-control '}}) }}
-            </div>
-            <div class="mb-2 col-md-6">
-                <label class="form-label">{{ form_label(form.nombre_pages) }}</label>
-                {{ form_widget(form.nombre_pages,{'attr': {'class': 'form-control '}}) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="mb-2 col-md-6">
-                <label class="form-label">{{ form_label(form.localisation) }}</label>
-                {{ form_widget(form.localisation,{'attr': {'class': 'form-control '}}) }}
-            </div>
-            <div class="mb-2 col-md-6">
-                <label class="form-label">{{ form_label(form.etat) }}</label>
-                {{ form_widget(form.etat,{'attr': {'class': 'form-control '}}) }}
-            </div>
-        </div>
-
-
-        <div class="col-md-4">
-            <button type="submit" class="btn btn-success mb-2 col-md-6">Enregistrer</button>
+        <div class="row mt-4">
+            <button type="submit" class="btn btn-success mb-2 col-md-3">Enregistrer</button>
         </div>
 
     </div>
 
 
 {{ form_end(form) }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initial check to hide or show fields based on the checked state
+            if (!$('#livre_projet').is(':checked')) {
+                $('#categorieField').hide();
+                $('#tokenField').hide();
+            } else {
+                $('#categorieField').show();
+                $('#tokenField').show();
+            }
+
+            // Event listener for the change in checked state
+            $('#livre_projet').on('change', function() {
+                if ($(this).is(':checked')) {
+                    $('#categorieField').show();
+                    $('#tokenField').show();
+                } else {
+                    $('#categorieField').hide();
+                    $('#tokenField').hide();
+                }
+            });
+        });
+    </script>
